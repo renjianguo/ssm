@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须为对应的Dao的接口名 -->
+<mapper namespace="com.xhhy.dao.UserDao">
+
+<!-- 配置映射关系 -->
+	<resultMap type="com.xhhy.domain.UserBean" id="user">
+		<id property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="userAge" column="user_age" />
+		<result property="userGender" column="user_gender" />
+		<result property="userEmail" column="user_email" />
+		<result property="userAddress" column="user_address" />
+	</resultMap>
+	
+
+	<insert id="insertUser" parameterType="UserBean"
+		useGeneratedKeys="true" keyColumn="user_id" keyProperty="userId">
+		insert into
+		user_tb
+		(user_id,user_name,user_age,user_gender,user_email,user_address)
+		values(null,#{userName},#{userAge},#{userGender},#{userEmail},#{userAddress})
+	</insert>
+     
+	<select id="queryAll" resultMap="user">
+		select
+		user_id,user_name,user_age,user_gender,user_email,user_address from
+		user_tb
+	</select>
+	
+</mapper>
